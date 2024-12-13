@@ -6,7 +6,7 @@ export class RegisterDTO{
     @IsNotEmpty()
     @MinLength(3)
     @MaxLength(20)
-    name:string
+    name:string;
 
     @IsNotEmpty()
     @IsEmail()
