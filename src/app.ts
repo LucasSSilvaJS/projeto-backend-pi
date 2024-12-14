@@ -1,6 +1,8 @@
 import express, {Express, Request, Response} from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
+import agendamentosRoute from './routes/agendamentos'
+import clientesRoute from './routes/clientes'
 import authorsRoute from './routes/authors'
 import booksRoute from './routes/books'
 import authRoute from './routes/auth'
@@ -15,6 +17,10 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 const imagesController = new ImagesController();
 
+app.use("/agendamentos", agendamentosRoute);
+app.use("/clientes", clientesRoute);
+//livraria esqueleto
+//não deletar
 app.use("/authors", authorsRoute);
 app.use("/books", booksRoute);
 app.use("/auth", authRoute);

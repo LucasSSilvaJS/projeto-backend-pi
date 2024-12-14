@@ -1,40 +1,36 @@
 import { MigrationInterface, QueryRunner, Table } from "typeorm";
 import { DBTable } from "../../constants/DBTable";
 
-export class CriarTabelaAgendamento1734099834834 implements MigrationInterface {
+export class CriarTabelaCliente1734144951262 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(
             new Table({
-                name: DBTable.AGENDAMENTOS,
+                name: DBTable.CLIENTES,
                 columns: [
                     {
-                        name: "id_agendamento",
+                        name: "id_usuario",
                         type: "int",
                         isPrimary: true,
-                        isGenerated: true,
-                        generationStrategy: 'increment'
-                    },
-                    {
-                        name: "data",
-                        type: "date",
                         isNullable: false
                     },
                     {
-                        name: "hora",
-                        type: "time",
-                        isNullable: false
-                    },
-                    {
-                        name: "cpf_cliente",
+                        name: "cpf",
                         type: "varchar",
                         length: "11",
+                        isPrimary: true,
                         isNullable: false
                     },
                     {
-                        name: "matricula_func",
+                        name: "nome",
                         type: "varchar",
                         length: "255",
+                        isNullable: false
+                    },
+                    {
+                        name: "telefone",
+                        type: "varchar",
+                        length: "11",
                         isNullable: false
                     },
                     {
@@ -52,11 +48,11 @@ export class CriarTabelaAgendamento1734099834834 implements MigrationInterface {
                 ]
             }),
             true
-        );
+        )
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropTable(DBTable.AGENDAMENTOS);
+        await queryRunner.dropTable(DBTable.CLIENTES);
     }
 
 }

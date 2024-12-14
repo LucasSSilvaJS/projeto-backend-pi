@@ -2,5 +2,6 @@ export enum DBTable{
     AUTHORS = "authors",
     BOOKS = "books",
     USERS = "users",
-    AGENDAMENTOS = "agendamentos"
+    AGENDAMENTOS = "agendamentos",
+    CLIENTES = "clientes"
 }

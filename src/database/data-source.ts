@@ -3,6 +3,8 @@ import { DataSource } from "typeorm";
 import { Author } from "../database/entities/Author";
 import { Book } from "./entities/Book";
 import { User } from "./entities/User";
+import { Agendamento } from "./entities/Agendamento";
+import { Cliente } from "./entities/Cliente";
 
 dotenv.config();
 
@@ -15,7 +17,7 @@ export const AppDataSource = new DataSource({
     database: "salaosenac",
     logging: ["query"],
     synchronize: false,
-    entities: [Author, Book, User],
+    entities: [Author, Book, User, Agendamento, Cliente],
     subscribers: [],
     migrations: ["src/database/migrations/*.ts"]
 });
