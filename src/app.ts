@@ -3,6 +3,7 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import agendamentosRoute from './routes/agendamentos'
 import clientesRoute from './routes/clientes'
+import funcionariosRoute from './routes/funcionarios'
 import authorsRoute from './routes/authors'
 import booksRoute from './routes/books'
 import authRoute from './routes/auth'
@@ -19,6 +20,7 @@ const imagesController = new ImagesController();
 
 app.use("/agendamentos", agendamentosRoute);
 app.use("/clientes", clientesRoute);
+app.use("/funcionarios", funcionariosRoute);
 //livraria esqueleto
 //não deletar
 app.use("/authors", authorsRoute);

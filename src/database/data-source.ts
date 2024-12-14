@@ -5,6 +5,7 @@ import { Book } from "./entities/Book";
 import { User } from "./entities/User";
 import { Agendamento } from "./entities/Agendamento";
 import { Cliente } from "./entities/Cliente";
+import { Funcionario } from "./entities/Funcionario";
 
 dotenv.config();
 
@@ -17,7 +18,7 @@ export const AppDataSource = new DataSource({
     database: "salaosenac",
     logging: ["query"],
     synchronize: false,
-    entities: [Author, Book, User, Agendamento, Cliente],
+    entities: [Author, Book, User, Agendamento, Cliente, Funcionario],
     subscribers: [],
     migrations: ["src/database/migrations/*.ts"]
 });
