@@ -4,5 +4,7 @@ export enum DBTable{
     USERS = "users",
     AGENDAMENTOS = "agendamentos",
     CLIENTES = "clientes",
-    FUNCIONARIOS = "funcionarios"
+    FUNCIONARIOS = "funcionarios",
+    HORARIOS = "horarios",
+    NOTIFICACOES = "notificacoes",
 }

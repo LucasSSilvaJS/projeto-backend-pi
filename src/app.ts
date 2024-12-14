@@ -1,14 +1,16 @@
 import express, {Express, Request, Response} from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
+import { ErrorHandler } from './utils/ErrorHandler';
+import { ImagesController } from './http/controllers/ImagesController';
+
+import horariosRoute from './routes/horarios'
 import agendamentosRoute from './routes/agendamentos'
 import clientesRoute from './routes/clientes'
 import funcionariosRoute from './routes/funcionarios'
 import authorsRoute from './routes/authors'
 import booksRoute from './routes/books'
 import authRoute from './routes/auth'
-import { ErrorHandler } from './utils/ErrorHandler';
-import { ImagesController } from './http/controllers/ImagesController';
 
 const app: Express = express();
 
@@ -18,6 +20,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 const imagesController = new ImagesController();
 
+app.use("/horarios", horariosRoute);
 app.use("/agendamentos", agendamentosRoute);
 app.use("/clientes", clientesRoute);
 app.use("/funcionarios", funcionariosRoute);
