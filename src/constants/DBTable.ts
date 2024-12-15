@@ -12,4 +12,5 @@ export enum DBTable{
     SERVICOS = "servicos",
     CATEGORIAS = "categorias",
     PRODUTOS = "produtos",
+    FORNECEDORES = "fornecedores"
 }
