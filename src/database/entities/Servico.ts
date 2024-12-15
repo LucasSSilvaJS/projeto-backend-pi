@@ -1,9 +1,9 @@
-import { Column, Entity, PrimaryColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, PrimaryColumn, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { DBTable } from "../../constants/DBTable";
 
 @Entity(DBTable.SERVICOS)
 export class Servico{
-    @PrimaryColumn()
+    @PrimaryGeneratedColumn()
     id_servico: number;
 
     @Column({nullable: false})
@@ -26,4 +26,10 @@ export class Servico{
 
     @Column({nullable: false})
     id_categoria: number;
+
+    @CreateDateColumn()
+    createdAt: Date;
+
+    @UpdateDateColumn()
+    updatedAt: Date;
 }

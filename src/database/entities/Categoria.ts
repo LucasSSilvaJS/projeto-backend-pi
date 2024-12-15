@@ -1,19 +1,13 @@
 import { Column, CreateDateColumn, Entity, PrimaryColumn, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { DBTable } from "../../constants/DBTable";
 
-@Entity(DBTable.NOTIFICACOES)
-export class Notificacao{
+@Entity(DBTable.CATEGORIAS)
+export class Categoria{
     @PrimaryGeneratedColumn()
-    id_notificacao: number;
+    id_categoria: number;
 
-    @Column()
-    tipo: string;
-
-    @Column()
-    dataEnvio: Date;
-
-    @Column()
-    cpf_cliente: string;
+    @Column({nullable: false})
+    nome: string;
 
     @CreateDateColumn()
     createdAt: Date;

@@ -4,6 +4,7 @@ import cors from 'cors';
 import { ErrorHandler } from './utils/ErrorHandler';
 import { ImagesController } from './http/controllers/ImagesController';
 
+import categoriasRoute from './routes/categorias'
 import servicosRoute from './routes/servicos'
 import pagamentosRoute from './routes/pagamentos'
 import notificacoesRoute from './routes/notificacoes'
@@ -23,6 +24,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 const imagesController = new ImagesController();
 
+app.use("/categorias", categoriasRoute);
 app.use("/servicos", servicosRoute);
 app.use("/pagamentos", pagamentosRoute);
 app.use("/notificacoes", notificacoesRoute);

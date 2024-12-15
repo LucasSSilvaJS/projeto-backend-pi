@@ -1,7 +1,5 @@
 import { Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { DBTable } from "../../constants/DBTable";
-import { Funcionario } from "./Funcionario";
-import { Cliente } from "./Cliente";
 
 @Entity(DBTable.AGENDAMENTOS)
 export class Agendamento{

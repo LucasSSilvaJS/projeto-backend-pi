@@ -53,22 +53,23 @@ export class CriarTabelaServico1734280945446 implements MigrationInterface {
                         name: "id_categoria",
                         type: "int",
                         isNullable: false
+                    },
+                    {
+                        name: 'createdAt',
+                        type: 'datetime',
+                        default: 'now()',
+                        isNullable: true
+                    },
+                    {
+                        name: 'updatedAt',
+                        type: 'datetime',
+                        default: 'now()',
+                        isNullable: true
                     }
                 ]
             }),
             true
         );
-
-        // await queryRunner.createForeignKey(
-        //     DBTable.SERVICOS,
-        //     new TableForeignKey({
-        //         columnNames: ["id_categoria"],
-        //         referencedColumnNames: ["id_categoria"],
-        //         referencedTableName: DBTable.CATEGORIAS,
-        //         onDelete: "NO ACTION",
-        //         onUpdate: "NO ACTION"
-        //     })
-        // );
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {

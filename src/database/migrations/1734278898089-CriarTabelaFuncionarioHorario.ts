@@ -17,6 +17,18 @@ export class CriarTabelaFuncionarioHorario1734278898089 implements MigrationInte
                         name: "id_usuario",
                         type: "int",
                         isNullable: false
+                    },
+                    {
+                        name: 'createdAt',
+                        type: 'datetime',
+                        default: 'now()',
+                        isNullable: true
+                    },
+                    {
+                        name: 'updatedAt',
+                        type: 'datetime',
+                        default: 'now()',
+                        isNullable: true
                     }
                 ]
             }),
