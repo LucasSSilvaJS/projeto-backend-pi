@@ -1,12 +1,13 @@
-import { Column, CreateDateColumn, Entity, PrimaryColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryColumn, UpdateDateColumn } from "typeorm";
 import { DBTable } from "../../constants/DBTable";
+import { Agendamento } from "./Agendamento";
 
 @Entity(DBTable.FUNCIONARIOS)
 export class Funcionario{
     @PrimaryColumn()
     id_usuario: number;
 
-    @PrimaryColumn()
+    @PrimaryColumn({unique: true, nullable: false})
     matricula: string;
 
     @Column({nullable: false})
@@ -17,6 +18,9 @@ export class Funcionario{
 
     @Column({nullable: false})
     disponibilidade: string;
+
+    // @OneToMany((type) => Agendamento, (agendamento) => agendamento.funcionario)
+    // agendamentos: Agendamento[];
 
     @CreateDateColumn()
     createdAt: Date;

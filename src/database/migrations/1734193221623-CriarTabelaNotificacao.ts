@@ -1,4 +1,4 @@
-import { MigrationInterface, QueryRunner, Table } from "typeorm";
+import { MigrationInterface, QueryRunner, Table, TableForeignKey } from "typeorm";
 import { DBTable } from "../../constants/DBTable";
 
 export class CriarTabelaNotificacao1734193221623 implements MigrationInterface {
@@ -48,6 +48,17 @@ export class CriarTabelaNotificacao1734193221623 implements MigrationInterface {
                 ]
             }),
             true
+        )
+
+        await queryRunner.createForeignKey(
+            DBTable.NOTIFICACOES,
+            new TableForeignKey({
+                columnNames: ["cpf_cliente"],
+                referencedColumnNames: ["cpf"],
+                referencedTableName: DBTable.CLIENTES,
+                onDelete: "CASCADE",
+                onUpdate: "CASCADE"
+            })
         )
     }
 

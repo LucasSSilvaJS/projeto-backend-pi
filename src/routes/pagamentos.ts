@@ -22,7 +22,7 @@ router.put(
 );
 router.delete(
     '/:id', 
-    ErrorHandler.catchErrors(AuthMiddleware.authenticate), 
+    // ErrorHandler.catchErrors(AuthMiddleware.authenticate), 
     ErrorHandler.catchErrors(pagamentoController.delete)
 );
 

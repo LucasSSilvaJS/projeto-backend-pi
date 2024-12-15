@@ -4,6 +4,7 @@ import cors from 'cors';
 import { ErrorHandler } from './utils/ErrorHandler';
 import { ImagesController } from './http/controllers/ImagesController';
 
+import servicosRoute from './routes/servicos'
 import pagamentosRoute from './routes/pagamentos'
 import notificacoesRoute from './routes/notificacoes'
 import horariosRoute from './routes/horarios'
@@ -22,12 +23,13 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 const imagesController = new ImagesController();
 
+app.use("/servicos", servicosRoute);
 app.use("/pagamentos", pagamentosRoute);
 app.use("/notificacoes", notificacoesRoute);
 app.use("/horarios", horariosRoute);
-app.use("/agendamentos", agendamentosRoute);
 app.use("/clientes", clientesRoute);
 app.use("/funcionarios", funcionariosRoute);
+app.use("/agendamentos", agendamentosRoute);
 //livraria esqueleto
 //não deletar
 app.use("/authors", authorsRoute);

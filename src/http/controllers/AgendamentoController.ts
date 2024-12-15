@@ -16,7 +16,7 @@ export class AgendamentoController {
     async getAgendamento(req: Request, res: Response){
         const {id} = req.params;
         const agendamento = await AppDataSource.getRepository(Agendamento).findOneByOrFail({
-            id_agendamento: Number(id),
+            id_agendamento: parseInt(id)
         });
         ResponseUtil.sendResponse(res, "Agendamento encontrado com sucesso", agendamento, null);
     }
@@ -26,6 +26,7 @@ export class AgendamentoController {
 
         const dto = new AgendamentoDTO();
         Object.assign(dto, agendamentoData);
+        // dto.id_agendamento = parseInt(agendamentoData.id_agendamento);
 
         await validateOrReject(dto);
 
@@ -49,7 +50,7 @@ export class AgendamentoController {
         const repo = AppDataSource.getRepository(Agendamento);
 
         const agendamento = await repo.findOneByOrFail({
-            id_agendamento: Number(id),
+            id_agendamento: parseInt(id)
         });
 
         repo.merge(agendamento, agendamentoData);
@@ -64,7 +65,7 @@ export class AgendamentoController {
         const repo = AppDataSource.getRepository(Agendamento);
 
         const agendamento = await repo.findOneByOrFail({
-            id_agendamento: Number(id),
+            id_agendamento: parseInt(id)
         });
 
         await repo.remove(agendamento);

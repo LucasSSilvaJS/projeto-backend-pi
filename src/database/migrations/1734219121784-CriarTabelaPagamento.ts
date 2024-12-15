@@ -1,4 +1,4 @@
-import { MigrationInterface, QueryRunner, Table } from "typeorm";
+import { MigrationInterface, QueryRunner, Table, TableForeignKey } from "typeorm";
 import { DBTable } from "../../constants/DBTable";
 
 export class CriarTabelaPagamento1734219121784 implements MigrationInterface {
@@ -55,6 +55,17 @@ export class CriarTabelaPagamento1734219121784 implements MigrationInterface {
                 ]
             }),
             true
+        );
+
+        await queryRunner.createForeignKey(
+            DBTable.PAGAMENTOS,
+            new TableForeignKey({
+                columnNames: ["cpf_cliente"],
+                referencedColumnNames: ["cpf"],
+                referencedTableName: DBTable.CLIENTES,
+                onDelete: "CASCADE",
+                onUpdate: "CASCADE"
+            })
         );
     }
 

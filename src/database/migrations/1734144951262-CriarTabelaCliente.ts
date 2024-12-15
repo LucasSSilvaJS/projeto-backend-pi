@@ -18,8 +18,9 @@ export class CriarTabelaCliente1734144951262 implements MigrationInterface {
                         name: "cpf",
                         type: "varchar",
                         length: "11",
-                        isPrimary: true,
-                        isNullable: false
+                        isNullable: false,
+                        isUnique: true,
+                        isPrimary: true
                     },
                     {
                         name: "nome",

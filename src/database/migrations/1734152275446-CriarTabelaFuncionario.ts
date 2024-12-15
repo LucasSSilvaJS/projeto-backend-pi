@@ -18,8 +18,9 @@ export class CriarTabelaFuncionario1734152275446 implements MigrationInterface {
                         name: "matricula",
                         type: "varchar",
                         length: "255",
-                        isPrimary: true,
-                        isNullable: false
+                        isNullable: false,
+                        isUnique: true,
+                        isPrimary: true
                     },
                     {
                         name: "funcao",

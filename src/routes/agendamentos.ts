@@ -1,7 +1,6 @@
 import express from 'express';
 import { ErrorHandler } from '../utils/ErrorHandler';
 import { AgendamentoController } from '../http/controllers/AgendamentoController';
-import { AuthMiddleware } from '../http/middlewares/AuthMiddleware';
 // import { AdminMiddleware } from '../http/middlewares/AdminMiddleware';
 
 const agendamentoController = new AgendamentoController()
@@ -22,7 +21,7 @@ router.put(
 );
 router.delete(
     '/:id', 
-    ErrorHandler.catchErrors(AuthMiddleware.authenticate), 
+    // ErrorHandler.catchErrors(AuthMiddleware.authenticate), 
     ErrorHandler.catchErrors(agendamentoController.delete)
 );
 

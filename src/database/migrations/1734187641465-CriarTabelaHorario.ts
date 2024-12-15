@@ -1,4 +1,4 @@
-import { MigrationInterface, QueryRunner, Table } from "typeorm";
+import { MigrationInterface, QueryRunner, Table, TableForeignKey } from "typeorm";
 import { DBTable } from "../../constants/DBTable";
 
 export class CriarTabelaHorario1734187641465 implements MigrationInterface {
@@ -45,7 +45,7 @@ export class CriarTabelaHorario1734187641465 implements MigrationInterface {
                 ]
             }),
             true
-        )
+        );
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {

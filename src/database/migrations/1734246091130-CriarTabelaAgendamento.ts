@@ -1,9 +1,10 @@
-import { MigrationInterface, QueryRunner, Table } from "typeorm";
+import { MigrationInterface, QueryRunner, Table, TableForeignKey } from "typeorm";
 import { DBTable } from "../../constants/DBTable";
 
-export class CriarTabelaAgendamento1734099834834 implements MigrationInterface {
+export class CriarTabelaAgendamento1734246091130 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
+
         await queryRunner.createTable(
             new Table({
                 name: DBTable.AGENDAMENTOS,
@@ -52,6 +53,28 @@ export class CriarTabelaAgendamento1734099834834 implements MigrationInterface {
                 ]
             }),
             true
+        );
+
+        await queryRunner.createForeignKey(
+            DBTable.AGENDAMENTOS,
+            new TableForeignKey({
+                referencedTableName: DBTable.CLIENTES,
+                columnNames: ["cpf_cliente"],
+                referencedColumnNames: ["cpf"],
+                onDelete: "CASCADE",
+                onUpdate: "CASCADE",
+            })
+        );
+
+        await queryRunner.createForeignKey(
+            DBTable.AGENDAMENTOS,
+            new TableForeignKey({
+                columnNames: ["matricula_func"],
+                referencedColumnNames: ["matricula"],
+                referencedTableName: DBTable.FUNCIONARIOS,
+                onDelete: "CASCADE",
+                onUpdate: "CASCADE",
+            })
         );
     }
 

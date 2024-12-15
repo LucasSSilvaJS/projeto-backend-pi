@@ -3,7 +3,7 @@ import { IsDateString, IsNotEmpty, IsString } from "class-validator";
 export class AgendamentoDTO{
     id_agendamento?: number;
 
-    @IsDateString()
+    @IsString()
     @IsNotEmpty()
     data: Date;
     

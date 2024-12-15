@@ -7,5 +7,8 @@ export enum DBTable{
     FUNCIONARIOS = "funcionarios",
     HORARIOS = "horarios",
     NOTIFICACOES = "notificacoes",
-    PAGAMENTOS = "pagamentos"
+    PAGAMENTOS = "pagamentos",
+    FUNCIONARIO_HORARIO = "funcionario_horario",
+    SERVICOS = "servicos",
+    CATEGORIAS = "categorias"
 }
