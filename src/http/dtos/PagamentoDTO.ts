@@ -1,15 +1,19 @@
 import { IsDateString, IsNotEmpty, IsNumber, IsString } from "class-validator";
 
-export class NotificacaoDTO{
-    id_notificacao?: number;
+export class PagamentoDTO{
+    id_pagamento?: number;
+
+    @IsNotEmpty()
+    @IsNumber()
+    valor: number;
 
     @IsNotEmpty()
     @IsString()
-    tipo: string;
+    metodo_pag: string;
 
     @IsNotEmpty()
     @IsDateString()
-    dataEnvio: Date;
+    data: Date;
 
     @IsNotEmpty()
     @IsString()
