@@ -1,43 +1,41 @@
 import { MigrationInterface, QueryRunner, Table, TableForeignKey } from "typeorm";
 import { DBTable } from "../../constants/DBTable";
 
-export class CriarTabelaPagamento1734219121784 implements MigrationInterface {
+export class CriarTabelaProduto1734344505849 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(
             new Table({
-                name: DBTable.PAGAMENTOS,
+                name: DBTable.PRODUTOS,
                 columns: [
                     {
-                        name: "id_pagamento",
+                        name: "id_produto",
                         type: "int",
                         isPrimary: true,
                         isGenerated: true,
                         generationStrategy: "increment"
                     },
                     {
-                        name: "valor",
-                        type: "decimal",
-                        precision: 7,
-                        scale: 2,
-                        isNullable: false
-                    },
-                    {
-                        name: "metodo_pag",
+                        name: "nome",
                         type: "varchar",
                         length: "255",
                         isNullable: false
                     },
                     {
-                        name: "data",
-                        type: "datetime",
-                        default: "now()",
+                        name: "valor",
+                        type: "decimal",
+                        precision: 10,
+                        scale: 2,
                         isNullable: false
                     },
                     {
-                        name: "cpf_cliente",
-                        type: "varchar",
-                        length: "11",
+                        name: "qtd_estoque",
+                        type: "int",
+                        isNullable: false
+                    },
+                    {
+                        name: "id_fornecedor",
+                        type: "int",
                         isNullable: false
                     },
                     {
@@ -58,11 +56,11 @@ export class CriarTabelaPagamento1734219121784 implements MigrationInterface {
         );
 
         await queryRunner.createForeignKey(
-            DBTable.PAGAMENTOS,
+            DBTable.PRODUTOS,
             new TableForeignKey({
-                columnNames: ["cpf_cliente"],
-                referencedColumnNames: ["cpf"],
-                referencedTableName: DBTable.CLIENTES,
+                columnNames: ["id_fornecedor"],
+                referencedColumnNames: ["id_fornecedor"],
+                referencedTableName: DBTable.FORNECEDORES,
                 onDelete: "CASCADE",
                 onUpdate: "CASCADE"
             })
@@ -70,7 +68,7 @@ export class CriarTabelaPagamento1734219121784 implements MigrationInterface {
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropTable(DBTable.PAGAMENTOS);
+        await queryRunner.dropTable(DBTable.PRODUTOS);
     }
 
 }

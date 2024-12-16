@@ -1,7 +1,7 @@
 import { MigrationInterface, QueryRunner, Table } from "typeorm";
 import { DBTable } from "../../constants/DBTable";
 
-export class CriarTabelaFornecedor1734303609824 implements MigrationInterface {
+export class CriarTabelaFornecedor1734344241986 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(

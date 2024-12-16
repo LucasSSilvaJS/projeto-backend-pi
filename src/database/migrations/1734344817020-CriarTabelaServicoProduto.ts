@@ -1,15 +1,15 @@
 import { MigrationInterface, QueryRunner, Table, TableForeignKey } from "typeorm";
 import { DBTable } from "../../constants/DBTable";
 
-export class CriarTabelaProdutoAtendimento1734336219141 implements MigrationInterface {
+export class CriarTabelaServicoProduto1734344817020 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(
             new Table({
-                name: DBTable.PRODUTO_ATENDIMENTO,
+                name: DBTable.SERVICO_PRODUTO,
                 columns: [
                     {
-                        name: "id_atendimento",
+                        name: "id_servico",
                         type: "int",
                         isPrimary: true,
                         isNullable: false
@@ -26,18 +26,18 @@ export class CriarTabelaProdutoAtendimento1734336219141 implements MigrationInte
         );
 
         await queryRunner.createForeignKey(
-            DBTable.PRODUTO_ATENDIMENTO,
+            DBTable.SERVICO_PRODUTO,
             new TableForeignKey({
-                columnNames: ["id_atendimento"],
-                referencedColumnNames: ["id_atendimento"],
-                referencedTableName: DBTable.ATENDIMENTOS,
+                columnNames: ["id_servico"],
+                referencedColumnNames: ["id_servico"],
+                referencedTableName: DBTable.SERVICOS,
                 onDelete: "CASCADE",
                 onUpdate: "CASCADE"
             })
         );
 
         await queryRunner.createForeignKey(
-            DBTable.PRODUTO_ATENDIMENTO,
+            DBTable.SERVICO_PRODUTO,
             new TableForeignKey({
                 columnNames: ["id_produto"],
                 referencedColumnNames: ["id_produto"],
@@ -49,7 +49,7 @@ export class CriarTabelaProdutoAtendimento1734336219141 implements MigrationInte
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropTable(DBTable.PRODUTO_ATENDIMENTO);
+        await queryRunner.dropTable(DBTable.SERVICO_PRODUTO);
     }
 
 }

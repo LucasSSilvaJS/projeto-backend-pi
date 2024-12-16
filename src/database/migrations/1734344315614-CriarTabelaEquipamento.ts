@@ -1,7 +1,7 @@
-import { MigrationInterface, QueryRunner, Table } from "typeorm";
+import { MigrationInterface, QueryRunner, Table, TableForeignKey } from "typeorm";
 import { DBTable } from "../../constants/DBTable";
 
-export class CriarTabelaEquipamento1734306459599 implements MigrationInterface {
+export class CriarTabelaEquipamento1734344315614 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(
@@ -29,6 +29,17 @@ export class CriarTabelaEquipamento1734306459599 implements MigrationInterface {
                 ]
             }),
             true
+        );
+
+        await queryRunner.createForeignKey(
+            DBTable.EQUIPAMENTOS,
+            new TableForeignKey({
+                columnNames: ["id_fornecedor"],
+                referencedColumnNames: ["id_fornecedor"],
+                referencedTableName: DBTable.FORNECEDORES,
+                onDelete: "CASCADE",
+                onUpdate: "CASCADE"
+            })
         );
     }
 

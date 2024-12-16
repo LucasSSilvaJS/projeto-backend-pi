@@ -1,21 +1,21 @@
 import { MigrationInterface, QueryRunner, Table, TableForeignKey } from "typeorm";
 import { DBTable } from "../../constants/DBTable";
 
-export class CriarTabelaFuncionarioServico1734338370066 implements MigrationInterface {
+export class ProdutoAtendimento1734344750828 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(
             new Table({
-                name: DBTable.FUNCIONARIO_SERVICO,
+                name: DBTable.PRODUTO_ATENDIMENTO,
                 columns: [
                     {
-                        name: "id_usuario",
+                        name: "id_atendimento",
                         type: "int",
                         isPrimary: true,
                         isNullable: false
                     },
                     {
-                        name: "id_servico",
+                        name: "id_produto",
                         type: "int",
                         isPrimary: true,
                         isNullable: false
@@ -26,22 +26,22 @@ export class CriarTabelaFuncionarioServico1734338370066 implements MigrationInte
         );
 
         await queryRunner.createForeignKey(
-            DBTable.FUNCIONARIO_SERVICO,
+            DBTable.PRODUTO_ATENDIMENTO,
             new TableForeignKey({
-                columnNames: ["id_usuario"],
-                referencedColumnNames: ["id_usuario"],
-                referencedTableName: DBTable.FUNCIONARIOS,
+                columnNames: ["id_atendimento"],
+                referencedColumnNames: ["id_atendimento"],
+                referencedTableName: DBTable.ATENDIMENTOS,
                 onDelete: "CASCADE",
                 onUpdate: "CASCADE"
             })
         );
 
         await queryRunner.createForeignKey(
-            DBTable.FUNCIONARIO_SERVICO,
+            DBTable.PRODUTO_ATENDIMENTO,
             new TableForeignKey({
-                columnNames: ["id_servico"],
-                referencedColumnNames: ["id_servico"],
-                referencedTableName: DBTable.SERVICOS,
+                columnNames: ["id_produto"],
+                referencedColumnNames: ["id_produto"],
+                referencedTableName: DBTable.PRODUTOS,
                 onDelete: "CASCADE",
                 onUpdate: "CASCADE"
             })
@@ -49,7 +49,7 @@ export class CriarTabelaFuncionarioServico1734338370066 implements MigrationInte
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropTable(DBTable.FUNCIONARIO_SERVICO);
+        await queryRunner.dropTable(DBTable.PRODUTO_ATENDIMENTO);
     }
 
 }

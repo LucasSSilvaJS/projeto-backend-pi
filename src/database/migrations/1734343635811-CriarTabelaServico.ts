@@ -1,18 +1,18 @@
-import { MigrationInterface, QueryRunner, Table } from "typeorm";
+import { MigrationInterface, QueryRunner, Table, TableForeignKey } from "typeorm";
 import { DBTable } from "../../constants/DBTable";
 
-export class CriarTabelaProduto1734292927425 implements MigrationInterface {
+export class CriarTabelaServico1734343635811 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(
             new Table({
-                name: DBTable.PRODUTOS,
+                name: DBTable.SERVICOS,
                 columns: [
                     {
-                        name: "id_produto",
+                        name: "id_servico",
                         type: "int",
-                        isPrimary: true,
                         isGenerated: true,
+                        isPrimary: true,
                         generationStrategy: "increment"
                     },
                     {
@@ -22,19 +22,35 @@ export class CriarTabelaProduto1734292927425 implements MigrationInterface {
                         isNullable: false
                     },
                     {
-                        name: "valor",
+                        name: "descricao",
+                        type: "text",
+                        isNullable: true
+                    },
+                    {
+                        name: "preco",
                         type: "decimal",
                         precision: 10,
                         scale: 2,
                         isNullable: false
                     },
                     {
-                        name: "qtd_estoque",
+                        name: "duracao",
                         type: "int",
                         isNullable: false
                     },
                     {
-                        name: "id_fornecedor",
+                        name: "qtd_profissionais",
+                        type: "int",
+                        isNullable: false
+                    },
+                    {
+                        name: "disponibilidade",
+                        type: "varchar",
+                        length: "255",
+                        isNullable: false
+                    },
+                    {
+                        name: "id_categoria",
                         type: "int",
                         isNullable: false
                     },
@@ -53,11 +69,22 @@ export class CriarTabelaProduto1734292927425 implements MigrationInterface {
                 ]
             }),
             true
-        )
+        );
+
+        await queryRunner.createForeignKey(
+            DBTable.SERVICOS,
+            new TableForeignKey({
+                referencedTableName: DBTable.CATEGORIAS,
+                columnNames: ["id_categoria"],
+                referencedColumnNames: ["id_categoria"],
+                onDelete: "CASCADE",
+                onUpdate: "CASCADE",
+            })
+        );
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropTable(DBTable.PRODUTOS);
+        await queryRunner.dropTable(DBTable.SERVICOS);
     }
 
 }

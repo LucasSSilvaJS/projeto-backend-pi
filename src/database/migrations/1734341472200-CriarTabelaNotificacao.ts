@@ -1,35 +1,34 @@
-import { MigrationInterface, QueryRunner, Table } from "typeorm";
+import { MigrationInterface, QueryRunner, Table, TableForeignKey } from "typeorm";
 import { DBTable } from "../../constants/DBTable";
 
-export class CriarTabelaCliente1734144951262 implements MigrationInterface {
+export class CriarTabelaNotificacao1734341472200 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(
             new Table({
-                name: DBTable.CLIENTES,
+                name: DBTable.NOTIFICACOES,
                 columns: [
                     {
-                        name: "id_usuario",
+                        name: "id_notificacao",
                         type: "int",
                         isPrimary: true,
-                        isNullable: false
+                        isGenerated: true,
+                        generationStrategy: "increment"
                     },
                     {
-                        name: "cpf",
-                        type: "varchar",
-                        length: "11",
-                        isNullable: false,
-                        isUnique: true,
-                        isPrimary: true
-                    },
-                    {
-                        name: "nome",
+                        name: "tipo",
                         type: "varchar",
                         length: "255",
                         isNullable: false
                     },
                     {
-                        name: "telefone",
+                        name: "dataEnvio",
+                        type: "datetime",
+                        default: "now()",
+                        isNullable: false
+                    },
+                    {
+                        name: "cpf_cliente",
                         type: "varchar",
                         length: "11",
                         isNullable: false
@@ -50,10 +49,21 @@ export class CriarTabelaCliente1734144951262 implements MigrationInterface {
             }),
             true
         )
+
+        await queryRunner.createForeignKey(
+            DBTable.NOTIFICACOES,
+            new TableForeignKey({
+                columnNames: ["cpf_cliente"],
+                referencedColumnNames: ["cpf"],
+                referencedTableName: DBTable.CLIENTES,
+                onDelete: "CASCADE",
+                onUpdate: "CASCADE"
+            })
+        )
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropTable(DBTable.CLIENTES);
+        await queryRunner.dropTable(DBTable.NOTIFICACOES);
     }
 
 }

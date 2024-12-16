@@ -1,19 +1,32 @@
 import { MigrationInterface, QueryRunner, Table, TableForeignKey } from "typeorm";
 import { DBTable } from "../../constants/DBTable";
 
-export class CriarTabelaServico1734280945446 implements MigrationInterface {
+export class CriarTabelaFuncionario1734340894051 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(
             new Table({
-                name: DBTable.SERVICOS,
+                name: DBTable.FUNCIONARIOS,
                 columns: [
                     {
-                        name: "id_servico",
+                        name: "id_usuario",
                         type: "int",
-                        isGenerated: true,
                         isPrimary: true,
-                        generationStrategy: "increment"
+                        isNullable: false
+                    },
+                    {
+                        name: "matricula",
+                        type: "varchar",
+                        length: "255",
+                        isNullable: false,
+                        isUnique: true,
+                        isPrimary: true
+                    },
+                    {
+                        name: "funcao",
+                        type: "varchar",
+                        length: "255",
+                        isNullable: false
                     },
                     {
                         name: "nome",
@@ -22,36 +35,9 @@ export class CriarTabelaServico1734280945446 implements MigrationInterface {
                         isNullable: false
                     },
                     {
-                        name: "descricao",
-                        type: "text",
-                        isNullable: true
-                    },
-                    {
-                        name: "preco",
-                        type: "decimal",
-                        precision: 10,
-                        scale: 2,
-                        isNullable: false
-                    },
-                    {
-                        name: "duracao",
-                        type: "int",
-                        isNullable: false
-                    },
-                    {
-                        name: "qtd_profissionais",
-                        type: "int",
-                        isNullable: false
-                    },
-                    {
                         name: "disponibilidade",
                         type: "varchar",
                         length: "255",
-                        isNullable: false
-                    },
-                    {
-                        name: "id_categoria",
-                        type: "int",
                         isNullable: false
                     },
                     {
@@ -70,10 +56,21 @@ export class CriarTabelaServico1734280945446 implements MigrationInterface {
             }),
             true
         );
+
+        await queryRunner.createForeignKey(
+            DBTable.FUNCIONARIOS,
+            new TableForeignKey({
+                columnNames: ["id_usuario"],
+                referencedColumnNames: ["id_usuario"],
+                referencedTableName: DBTable.USUARIOS,
+                onDelete: "CASCADE",
+                onUpdate: "CASCADE"
+            })
+        );
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropTable(DBTable.SERVICOS);
+        await queryRunner.dropTable(DBTable.FUNCIONARIOS);
     }
 
 }

@@ -1,33 +1,24 @@
-import { MigrationInterface, QueryRunner, Table, TableForeignKey } from "typeorm";
+import { MigrationInterface, QueryRunner, Table } from "typeorm";
 import { DBTable } from "../../constants/DBTable";
 
-export class CriarTabelaHorario1734187641465 implements MigrationInterface {
+export class CriarTabelaCategoria1734343527480 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(
             new Table({
-                name: DBTable.HORARIOS,
+                name: DBTable.CATEGORIAS,
                 columns: [
                     {
-                        name: "id_horario",
+                        name: "id_categoria",
                         type: "int",
-                        isPrimary: true,
                         isGenerated: true,
+                        isPrimary: true,
                         generationStrategy: "increment"
                     },
                     {
-                        name: "diaSemana",
-                        type: "date",
-                        isNullable: false
-                    },
-                    {
-                        name: "horaInicio",
-                        type: "time",
-                        isNullable: false
-                    },
-                    {
-                        name: "horaFim",
-                        type: "time",
+                        name: "nome",
+                        type: "varchar",
+                        length: "100",
                         isNullable: false
                     },
                     {
@@ -45,11 +36,10 @@ export class CriarTabelaHorario1734187641465 implements MigrationInterface {
                 ]
             }),
             true
-        );
+        )
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropTable(DBTable.HORARIOS);
+        await queryRunner.dropTable(DBTable.CATEGORIAS);
     }
-
 }

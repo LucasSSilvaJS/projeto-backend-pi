@@ -1,41 +1,37 @@
 import { MigrationInterface, QueryRunner, Table, TableForeignKey } from "typeorm";
 import { DBTable } from "../../constants/DBTable";
 
-export class CriarTabelaAgendamento1734246091130 implements MigrationInterface {
+export class CriarTabelaCliente1734340871595 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
-
         await queryRunner.createTable(
             new Table({
-                name: DBTable.AGENDAMENTOS,
+                name: DBTable.CLIENTES,
                 columns: [
                     {
-                        name: "id_agendamento",
+                        name: "id_usuario",
                         type: "int",
                         isPrimary: true,
-                        isGenerated: true,
-                        generationStrategy: 'increment'
-                    },
-                    {
-                        name: "data",
-                        type: "date",
                         isNullable: false
                     },
                     {
-                        name: "hora",
-                        type: "time",
-                        isNullable: false
-                    },
-                    {
-                        name: "cpf_cliente",
+                        name: "cpf",
                         type: "varchar",
                         length: "11",
+                        isNullable: false,
+                        isUnique: true,
+                        isPrimary: true
+                    },
+                    {
+                        name: "nome",
+                        type: "varchar",
+                        length: "255",
                         isNullable: false
                     },
                     {
-                        name: "matricula_func",
+                        name: "telefone",
                         type: "varchar",
-                        length: "255",
+                        length: "11",
                         isNullable: false
                     },
                     {
@@ -56,30 +52,19 @@ export class CriarTabelaAgendamento1734246091130 implements MigrationInterface {
         );
 
         await queryRunner.createForeignKey(
-            DBTable.AGENDAMENTOS,
+            DBTable.CLIENTES,
             new TableForeignKey({
-                referencedTableName: DBTable.CLIENTES,
-                columnNames: ["cpf_cliente"],
-                referencedColumnNames: ["cpf"],
+                columnNames: ["id_usuario"],
+                referencedColumnNames: ["id_usuario"],
+                referencedTableName: DBTable.USUARIOS,
                 onDelete: "CASCADE",
-                onUpdate: "CASCADE",
-            })
-        );
-
-        await queryRunner.createForeignKey(
-            DBTable.AGENDAMENTOS,
-            new TableForeignKey({
-                columnNames: ["matricula_func"],
-                referencedColumnNames: ["matricula"],
-                referencedTableName: DBTable.FUNCIONARIOS,
-                onDelete: "CASCADE",
-                onUpdate: "CASCADE",
+                onUpdate: "CASCADE"
             })
         );
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropTable(DBTable.AGENDAMENTOS);
+        await queryRunner.dropTable(DBTable.CLIENTES);
     }
 
 }

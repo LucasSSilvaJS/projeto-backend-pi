@@ -1,36 +1,21 @@
 import { MigrationInterface, QueryRunner, Table, TableForeignKey } from "typeorm";
 import { DBTable } from "../../constants/DBTable";
 
-export class CriarTabelaNotificacao1734193221623 implements MigrationInterface {
+export class CriarTabelaFuncionarioHorario1734342388048 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(
             new Table({
-                name: DBTable.NOTIFICACOES,
+                name: DBTable.FUNCIONARIO_HORARIO,
                 columns: [
                     {
-                        name: "id_notificacao",
+                        name: "id_horario",
                         type: "int",
-                        isPrimary: true,
-                        isGenerated: true,
-                        generationStrategy: "increment"
-                    },
-                    {
-                        name: "tipo",
-                        type: "varchar",
-                        length: "255",
                         isNullable: false
                     },
                     {
-                        name: "dataEnvio",
-                        type: "datetime",
-                        default: "now()",
-                        isNullable: false
-                    },
-                    {
-                        name: "cpf_cliente",
-                        type: "varchar",
-                        length: "11",
+                        name: "id_usuario",
+                        type: "int",
                         isNullable: false
                     },
                     {
@@ -48,22 +33,33 @@ export class CriarTabelaNotificacao1734193221623 implements MigrationInterface {
                 ]
             }),
             true
-        )
+        );
 
         await queryRunner.createForeignKey(
-            DBTable.NOTIFICACOES,
+            DBTable.FUNCIONARIO_HORARIO,
             new TableForeignKey({
-                columnNames: ["cpf_cliente"],
-                referencedColumnNames: ["cpf"],
-                referencedTableName: DBTable.CLIENTES,
+                columnNames: ["id_horario"],
+                referencedColumnNames: ["id_horario"],
+                referencedTableName: DBTable.HORARIOS,
                 onDelete: "CASCADE",
                 onUpdate: "CASCADE"
             })
-        )
+        );
+
+        await queryRunner.createForeignKey(
+            DBTable.FUNCIONARIO_HORARIO,
+            new TableForeignKey({
+                columnNames: ["id_usuario"],
+                referencedColumnNames: ["id_usuario"],
+                referencedTableName: DBTable.FUNCIONARIOS,
+                onDelete: "CASCADE",
+                onUpdate: "CASCADE"
+            })
+        );
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropTable(DBTable.NOTIFICACOES);
+        await queryRunner.dropTable(DBTable.FUNCIONARIO_HORARIO);
     }
 
 }

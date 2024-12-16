@@ -1,21 +1,21 @@
 import { MigrationInterface, QueryRunner, Table, TableForeignKey } from "typeorm";
 import { DBTable } from "../../constants/DBTable";
 
-export class CriarTabelaServicoEquipamento1734337964272 implements MigrationInterface {
+export class CriarTabelaFuncionarioServico1734344144161 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(
             new Table({
-                name: DBTable.SERVICO_EQUIPAMENTO,
+                name: DBTable.FUNCIONARIO_SERVICO,
                 columns: [
                     {
-                        name: "id_servico",
+                        name: "id_usuario",
                         type: "int",
                         isPrimary: true,
                         isNullable: false
                     },
                     {
-                        name: "id_equipamento",
+                        name: "id_servico",
                         type: "int",
                         isPrimary: true,
                         isNullable: false
@@ -26,7 +26,18 @@ export class CriarTabelaServicoEquipamento1734337964272 implements MigrationInte
         );
 
         await queryRunner.createForeignKey(
-            DBTable.SERVICO_EQUIPAMENTO,
+            DBTable.FUNCIONARIO_SERVICO,
+            new TableForeignKey({
+                columnNames: ["id_usuario"],
+                referencedColumnNames: ["id_usuario"],
+                referencedTableName: DBTable.FUNCIONARIOS,
+                onDelete: "CASCADE",
+                onUpdate: "CASCADE"
+            })
+        );
+
+        await queryRunner.createForeignKey(
+            DBTable.FUNCIONARIO_SERVICO,
             new TableForeignKey({
                 columnNames: ["id_servico"],
                 referencedColumnNames: ["id_servico"],
@@ -35,21 +46,10 @@ export class CriarTabelaServicoEquipamento1734337964272 implements MigrationInte
                 onUpdate: "CASCADE"
             })
         );
-
-        await queryRunner.createForeignKey(
-            DBTable.SERVICO_EQUIPAMENTO,
-            new TableForeignKey({
-                columnNames: ["id_equipamento"],
-                referencedColumnNames: ["id_equipamento"],
-                referencedTableName: DBTable.EQUIPAMENTOS,
-                onDelete: "CASCADE",
-                onUpdate: "CASCADE"
-            })
-        );
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropTable(DBTable.SERVICO_EQUIPAMENTO);
+        await queryRunner.dropTable(DBTable.FUNCIONARIO_SERVICO);
     }
 
 }

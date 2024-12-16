@@ -1,43 +1,43 @@
-import { MigrationInterface, QueryRunner, Table } from "typeorm";
+import { MigrationInterface, QueryRunner, Table, TableForeignKey } from "typeorm";
 import { DBTable } from "../../constants/DBTable";
 
-export class CriarTabelaFuncionario1734152275446 implements MigrationInterface {
+export class CriarTabelaPagamento1734341780992 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(
             new Table({
-                name: DBTable.FUNCIONARIOS,
+                name: DBTable.PAGAMENTOS,
                 columns: [
                     {
-                        name: "id_usuario",
+                        name: "id_pagamento",
                         type: "int",
                         isPrimary: true,
+                        isGenerated: true,
+                        generationStrategy: "increment"
+                    },
+                    {
+                        name: "valor",
+                        type: "decimal",
+                        precision: 7,
+                        scale: 2,
                         isNullable: false
                     },
                     {
-                        name: "matricula",
-                        type: "varchar",
-                        length: "255",
-                        isNullable: false,
-                        isUnique: true,
-                        isPrimary: true
-                    },
-                    {
-                        name: "funcao",
-                        type: "varchar",
-                        length: "255",
-                        isNullable: false
-                    },
-                    {
-                        name: "nome",
+                        name: "metodo_pag",
                         type: "varchar",
                         length: "255",
                         isNullable: false
                     },
                     {
-                        name: "disponibilidade",
+                        name: "data",
+                        type: "datetime",
+                        default: "now()",
+                        isNullable: false
+                    },
+                    {
+                        name: "cpf_cliente",
                         type: "varchar",
-                        length: "255",
+                        length: "11",
                         isNullable: false
                     },
                     {
@@ -55,11 +55,22 @@ export class CriarTabelaFuncionario1734152275446 implements MigrationInterface {
                 ]
             }),
             true
-        )
+        );
+
+        await queryRunner.createForeignKey(
+            DBTable.PAGAMENTOS,
+            new TableForeignKey({
+                columnNames: ["cpf_cliente"],
+                referencedColumnNames: ["cpf"],
+                referencedTableName: DBTable.CLIENTES,
+                onDelete: "CASCADE",
+                onUpdate: "CASCADE"
+            })
+        );
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropTable(DBTable.FUNCIONARIOS);
+        await queryRunner.dropTable(DBTable.PAGAMENTOS);
     }
 
 }
