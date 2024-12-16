@@ -2,6 +2,8 @@ import { Column, CreateDateColumn, Entity, JoinColumn, OneToMany, OneToOne, Prim
 import { DBTable } from "../../constants/DBTable";
 import { Agendamento } from "./Agendamento";
 import { Usuario } from "./Usuario";
+import { Pagamento } from "./Pagamento";
+import { Notificacao } from "./Notificacao";
 
 @Entity(DBTable.CLIENTES)
 export class Cliente{
@@ -29,4 +31,11 @@ export class Cliente{
     @OneToOne(() => Usuario, (usuario) => usuario.funcionario)
     @JoinColumn()
     usuario: Usuario;
+
+    @OneToMany(() => Pagamento, (pagamento) => pagamento.cliente)
+    pagamentos: Pagamento[];
+
+    @OneToMany(() => Notificacao, (noticacao) => noticacao.cliente)
+    notificacoes: Notificacao[];
+
 }
