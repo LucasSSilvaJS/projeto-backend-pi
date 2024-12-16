@@ -20,7 +20,6 @@ export class CriarTabelaFuncionario1734340894051 implements MigrationInterface {
                         length: "255",
                         isNullable: false,
                         isUnique: true,
-                        isPrimary: true
                     },
                     {
                         name: "funcao",

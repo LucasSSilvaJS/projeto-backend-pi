@@ -19,8 +19,7 @@ export class CriarTabelaCliente1734340871595 implements MigrationInterface {
                         type: "varchar",
                         length: "11",
                         isNullable: false,
-                        isUnique: true,
-                        isPrimary: true
+                        isUnique: true
                     },
                     {
                         name: "nome",

@@ -14,9 +14,9 @@ export class ClienteController {
     }
 
     async getCliente(req: Request, res: Response){
-        const {cpf} = req.params;
+        const {id} = req.params;
         const cliente = await AppDataSource.getRepository(Cliente).findOneByOrFail({
-            cpf
+            id_usuario: parseInt(id)
         });
         ResponseUtil.sendResponse(res, "Cliente encontrado com sucesso", cliente, null);
     }
@@ -26,6 +26,7 @@ export class ClienteController {
 
         const dto = new ClienteDTO();
         Object.assign(dto, clienteData);
+        dto.id_usuario = parseInt(clienteData.id_usuario);
 
         await validateOrReject(dto);
 
@@ -37,19 +38,19 @@ export class ClienteController {
     }
 
     async update(req: Request, res: Response){
-        const {cpf} = req.params;
+        const {id} = req.params;
         const clienteData = req.body;
 
         const dto = new ClienteDTO();
         Object.assign(dto, clienteData);
-        // dto.id_usuario = parseInt(id);
+        dto.id_usuario = parseInt(id);
 
         await validateOrReject(dto);
 
         const repo = AppDataSource.getRepository(Cliente);
 
         const cliente = await repo.findOneByOrFail({
-            cpf
+            id_usuario: parseInt(id)
         });
 
         repo.merge(cliente, clienteData);
@@ -59,12 +60,12 @@ export class ClienteController {
     }
 
     async delete(req: Request, res: Response){
-        const {cpf} = req.params;
+        const {id} = req.params;
 
         const repo = AppDataSource.getRepository(Cliente);
 
         const cliente = await repo.findOneByOrFail({
-            cpf
+            id_usuario: parseInt(id)
         });
 
         await repo.remove(cliente);

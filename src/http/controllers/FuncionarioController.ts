@@ -14,9 +14,9 @@ export class FuncionarioController {
     }
 
     async getFuncionario(req: Request, res: Response){
-        const {matricula} = req.params;
+        const {id} = req.params;
         const funcionario = await AppDataSource.getRepository(Funcionario).findOneByOrFail({
-            matricula
+            id_usuario: parseInt(id)
         });
         ResponseUtil.sendResponse(res, "Funcionário encontrado com sucesso", funcionario, null);
     }
@@ -26,6 +26,7 @@ export class FuncionarioController {
 
         const dto = new FuncionarioDTO();
         Object.assign(dto, funcionarioData);
+        dto.id_usuario = parseInt(funcionarioData.id_usuario);
 
         await validateOrReject(dto);
 
@@ -37,19 +38,19 @@ export class FuncionarioController {
     }
 
     async update(req: Request, res: Response){
-        const {matricula} = req.params;
+        const {id} = req.params;
         const funcionarioData = req.body;
 
         const dto = new FuncionarioDTO();
         Object.assign(dto, funcionarioData);
-        // dto.id_agendamento = parseInt(id);
+        dto.id_usuario = parseInt(id);
 
         await validateOrReject(dto);
 
         const repo = AppDataSource.getRepository(Funcionario);
 
         const funcionario = await repo.findOneByOrFail({
-            matricula
+            id_usuario: parseInt(id)
         });
 
         repo.merge(funcionario, funcionarioData);
@@ -59,12 +60,12 @@ export class FuncionarioController {
     }
 
     async delete(req: Request, res: Response){
-        const {matricula} = req.params;
+        const {id} = req.params;
 
         const repo = AppDataSource.getRepository(Funcionario);
 
         const funcionario = await repo.findOneByOrFail({
-            matricula
+            id_usuario: parseInt(id)
         });
 
         await repo.remove(funcionario);

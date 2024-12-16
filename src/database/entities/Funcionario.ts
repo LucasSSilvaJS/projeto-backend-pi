@@ -7,7 +7,7 @@ export class Funcionario{
     @PrimaryColumn()
     id_usuario: number;
 
-    @PrimaryColumn({unique: true, nullable: false})
+    @Column({unique: true, nullable: false})
     matricula: string;
 
     @Column({nullable: false})

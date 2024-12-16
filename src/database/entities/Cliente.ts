@@ -7,7 +7,7 @@ export class Cliente{
     @PrimaryColumn()
     id_usuario: number;
 
-    @PrimaryColumn({unique: true, nullable: false})
+    @Column({unique: true, nullable: false})
     cpf: string;
 
     @Column({nullable: false})
