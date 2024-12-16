@@ -1,5 +1,7 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { DBTable } from "../../constants/DBTable";
+import { Cliente } from "./Cliente";
+import { Funcionario } from "./Funcionario";
 
 @Entity(DBTable.USUARIOS)
 export class Usuario{
@@ -14,4 +16,10 @@ export class Usuario{
 
     @Column({nullable: false})
     tipo_usuario: string;
+
+    @OneToOne(() => Cliente, (cliente) => cliente.usuario)
+    cliente: Cliente;
+
+    @OneToOne(() => Funcionario, (funcionario) => funcionario.usuario)
+    funcionario: Funcionario;
 }

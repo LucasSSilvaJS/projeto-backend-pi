@@ -1,6 +1,7 @@
-import { Column, CreateDateColumn, Entity, OneToMany, PrimaryColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, OneToMany, OneToOne, PrimaryColumn, UpdateDateColumn } from "typeorm";
 import { DBTable } from "../../constants/DBTable";
 import { Agendamento } from "./Agendamento";
+import { Usuario } from "./Usuario";
 
 @Entity(DBTable.CLIENTES)
 export class Cliente{
@@ -24,4 +25,8 @@ export class Cliente{
 
     @UpdateDateColumn()
     updatedAt: Date;
+
+    @OneToOne(() => Usuario, (usuario) => usuario.funcionario)
+    @JoinColumn()
+    usuario: Usuario;
 }

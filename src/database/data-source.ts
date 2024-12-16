@@ -28,8 +28,8 @@ export const AppDataSource = new DataSource({
     password: "root",
     database: "salaosenac",
     logging: ["query"],
-    synchronize: false,
-    entities: [Author, Book, User, Cliente, Funcionario, Agendamento, Horario, Notificacao, Pagamento, Servico, Categoria, Produto, Fornecedor, Equipamento, Atendimento, Feedback, Usuario],
+    synchronize: true,
+    entities: ["src/database/entities/*.ts"],
     subscribers: [],
     migrations: ["src/database/migrations/*.ts"]
 });

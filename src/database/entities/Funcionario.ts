@@ -1,6 +1,7 @@
-import { Column, CreateDateColumn, Entity, OneToMany, PrimaryColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, OneToMany, OneToOne, PrimaryColumn, UpdateDateColumn } from "typeorm";
 import { DBTable } from "../../constants/DBTable";
 import { Agendamento } from "./Agendamento";
+import { Usuario } from "./Usuario";
 
 @Entity(DBTable.FUNCIONARIOS)
 export class Funcionario{
@@ -21,6 +22,10 @@ export class Funcionario{
 
     // @OneToMany((type) => Agendamento, (agendamento) => agendamento.funcionario)
     // agendamentos: Agendamento[];
+
+    @OneToOne(() => Usuario, (usuario) => usuario.funcionario)
+    @JoinColumn()
+    usuario: Usuario;
 
     @CreateDateColumn()
     createdAt: Date;
