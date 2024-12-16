@@ -1,4 +1,4 @@
-import { MigrationInterface, QueryRunner, Table } from "typeorm";
+import { MigrationInterface, QueryRunner, Table, TableForeignKey } from "typeorm";
 import { DBTable } from "../../constants/DBTable";
 
 export class CriarTabelaAtendimento1734310073225 implements MigrationInterface {
@@ -38,6 +38,28 @@ export class CriarTabelaAtendimento1734310073225 implements MigrationInterface {
                 ]
             }),
             true
+        );
+
+        await queryRunner.createForeignKey(
+            DBTable.ATENDIMENTOS,
+            new TableForeignKey({
+                columnNames: ["id_agendamento"],
+                referencedColumnNames: ["id_agendamento"],
+                referencedTableName: DBTable.AGENDAMENTOS,
+                onDelete: "NO ACTION",
+                onUpdate: "NO ACTION"
+            })
+        );
+
+        await queryRunner.createForeignKey(
+            DBTable.ATENDIMENTOS,
+            new TableForeignKey({
+                columnNames: ["id_servico"],
+                referencedColumnNames: ["id_servico"],
+                referencedTableName: DBTable.SERVICOS,
+                onDelete: "NO ACTION",
+                onUpdate: "NO ACTION"
+            })
         );
     }
 
