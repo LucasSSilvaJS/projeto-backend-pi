@@ -1,5 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { DBTable } from "../../constants/DBTable";
+import { Feedback } from "./Feedback";
 
 @Entity(DBTable.ATENDIMENTOS)
 export class Atendimento{
@@ -17,4 +18,7 @@ export class Atendimento{
     
     @Column({nullable: false})
     produtosUtilizados: string;
+
+    @OneToMany(() => Feedback, (feedback) => feedback.atendimento)
+    feedbacks: Feedback[];
 }

@@ -1,5 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { DBTable } from "../../constants/DBTable";
+import { Atendimento } from "./Atendimento";
 
 @Entity(DBTable.FEEDBACKS)
 export class Feedback{
@@ -29,4 +30,8 @@ export class Feedback{
     
     @Column({nullable: false})
     id_atendimento: number;
+
+    @ManyToOne(() => Atendimento, (atendimento) => atendimento.feedbacks)
+    @JoinColumn({name: "id_atendimento"})
+    atendimento: Atendimento;
 }
