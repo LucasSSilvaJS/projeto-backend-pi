@@ -3,6 +3,7 @@ import { DBTable } from "../../constants/DBTable";
 import { Agendamento } from "./Agendamento";
 import { Usuario } from "./Usuario";
 import { FuncionarioServico } from "./FuncionarioServico";
+import { FuncionarioHorario } from "./FuncionarioHorario";
 
 @Entity(DBTable.FUNCIONARIOS)
 export class Funcionario{
@@ -30,6 +31,9 @@ export class Funcionario{
 
     @OneToMany(() => FuncionarioServico, (funcionarioServico) => funcionarioServico.funcionario)
     funcionarioServicos: FuncionarioServico[];
+
+    @OneToMany(() => FuncionarioHorario, (funcionarioHorario) => funcionarioHorario.funcionario)
+    funcionarioHorarios: FuncionarioHorario[];
 
     @CreateDateColumn()
     createdAt: Date;

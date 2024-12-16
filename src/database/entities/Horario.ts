@@ -1,5 +1,6 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { DBTable } from "../../constants/DBTable";
+import { FuncionarioHorario } from "./FuncionarioHorario";
 
 @Entity(DBTable.HORARIOS)
 export class Horario{
@@ -20,4 +21,7 @@ export class Horario{
 
     @UpdateDateColumn()
     updatedAt: Date;
+
+    @OneToMany(() => FuncionarioHorario, (funcionarioHorario) => funcionarioHorario.horario)
+    funcionarioHorarios: FuncionarioHorario[];
 }
