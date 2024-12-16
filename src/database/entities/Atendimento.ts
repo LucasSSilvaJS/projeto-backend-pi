@@ -1,6 +1,8 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { DBTable } from "../../constants/DBTable";
 import { Feedback } from "./Feedback";
+import { Agendamento } from "./Agendamento";
+import { Servico } from "./Servico";
 
 @Entity(DBTable.ATENDIMENTOS)
 export class Atendimento{
@@ -21,4 +23,12 @@ export class Atendimento{
 
     @OneToMany(() => Feedback, (feedback) => feedback.atendimento)
     feedbacks: Feedback[];
+
+    @OneToOne(() => Agendamento, (agendamento) => agendamento.atendimento)
+    @JoinColumn({name: "id_agendamento"})
+    agendamento: Agendamento;
+
+    @ManyToOne(() => Servico, (servico) => servico.atendimentos)
+    @JoinColumn({name: "id_servico"})
+    servico: Servico;
 }

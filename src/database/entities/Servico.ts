@@ -1,6 +1,7 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryColumn, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryColumn, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { DBTable } from "../../constants/DBTable";
 import { Categoria } from "./Categoria";
+import { Atendimento } from "./Atendimento";
 
 @Entity(DBTable.SERVICOS)
 export class Servico{
@@ -37,4 +38,7 @@ export class Servico{
     @ManyToOne(() => Categoria, (categoria) => categoria.servicos)
     @JoinColumn({name: "id_categoria"})
     categoria: Categoria;
+
+    @OneToMany(() => Atendimento, (atendimento) => atendimento.servico)
+    atendimentos: Atendimento[];
 }

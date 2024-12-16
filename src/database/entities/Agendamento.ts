@@ -1,7 +1,8 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { DBTable } from "../../constants/DBTable";
 import { Cliente } from "./Cliente";
 import { Funcionario } from "./Funcionario";
+import { Atendimento } from "./Atendimento";
 
 @Entity(DBTable.AGENDAMENTOS)
 export class Agendamento{
@@ -27,6 +28,9 @@ export class Agendamento{
     @ManyToOne((type) => Funcionario, (funcionario) => funcionario.agendamentos)
     @JoinColumn({ name: "id_funcionario" })
     funcionario: Funcionario;
+
+    @OneToOne(() => Atendimento, (atendimento) => atendimento.agendamento)
+    atendimento: Atendimento;
 
     @CreateDateColumn()
     createdAt: Date;
