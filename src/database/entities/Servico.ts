@@ -1,5 +1,6 @@
-import { Column, CreateDateColumn, Entity, PrimaryColumn, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryColumn, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { DBTable } from "../../constants/DBTable";
+import { Categoria } from "./Categoria";
 
 @Entity(DBTable.SERVICOS)
 export class Servico{
@@ -32,4 +33,8 @@ export class Servico{
 
     @UpdateDateColumn()
     updatedAt: Date;
+
+    @ManyToOne(() => Categoria, (categoria) => categoria.servicos)
+    @JoinColumn({name: "id_categoria"})
+    categoria: Categoria;
 }

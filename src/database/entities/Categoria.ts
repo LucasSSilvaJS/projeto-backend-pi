@@ -1,5 +1,6 @@
-import { Column, CreateDateColumn, Entity, PrimaryColumn, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryColumn, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { DBTable } from "../../constants/DBTable";
+import { Servico } from "./Servico";
 
 @Entity(DBTable.CATEGORIAS)
 export class Categoria{
@@ -14,4 +15,7 @@ export class Categoria{
 
     @UpdateDateColumn()
     updatedAt: Date;
+
+    @OneToMany(() => Servico, (servico) => servico.categoria)
+    servicos: Servico[];
 }
