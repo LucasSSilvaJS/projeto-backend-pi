@@ -16,6 +16,6 @@ export class PagamentoDTO{
     data: Date;
 
     @IsNotEmpty()
-    @IsString()
-    cpf_cliente: string;
+    @IsNumber()
+    id_cliente: number;
 }

@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { DBTable } from "../../constants/DBTable";
 import { Cliente } from "./Cliente";
 
@@ -17,9 +17,10 @@ export class Pagamento{
     data: Date;
 
     @Column()
-    cpf_cliente: string;
+    id_cliente: number;
 
     @ManyToOne(() => Cliente, (cliente) => cliente.pagamentos)
+    @JoinColumn({ name: "id_cliente" })
     cliente: Cliente;
 
     @CreateDateColumn()

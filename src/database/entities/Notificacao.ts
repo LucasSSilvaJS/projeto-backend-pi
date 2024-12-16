@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryColumn, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryColumn, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { DBTable } from "../../constants/DBTable";
 import { Cliente } from "./Cliente";
 
@@ -14,9 +14,10 @@ export class Notificacao{
     dataEnvio: Date;
 
     @Column()
-    cpf_cliente: string;
+    id_cliente: number;
 
     @ManyToOne(() => Cliente, (cliente) => cliente.notificacoes)
+    @JoinColumn({ name: "id_cliente" })
     cliente: Cliente;
 
     @CreateDateColumn()

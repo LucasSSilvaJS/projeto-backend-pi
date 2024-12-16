@@ -1,4 +1,4 @@
-import { IsDateString, IsNotEmpty, IsString } from "class-validator";
+import { IsDateString, IsNotEmpty, IsNumber, IsString } from "class-validator";
 
 export class AgendamentoDTO{
     id_agendamento?: number;
@@ -11,11 +11,11 @@ export class AgendamentoDTO{
     @IsNotEmpty()
     hora: string;
 
-    @IsString()
+    @IsNumber()
     @IsNotEmpty()
-    cpf_cliente: string;
-
-    @IsString()
+    id_cliente: number;
+    
+    @IsNumber()
     @IsNotEmpty()
-    matricula_func: string;
+    id_funcionario: number;
 }

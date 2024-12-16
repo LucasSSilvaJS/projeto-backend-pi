@@ -35,9 +35,8 @@ export class CriarTabelaPagamento1734341780992 implements MigrationInterface {
                         isNullable: false
                     },
                     {
-                        name: "cpf_cliente",
-                        type: "varchar",
-                        length: "11",
+                        name: "id_cliente",
+                        type: "int",
                         isNullable: false
                     },
                     {
@@ -60,8 +59,8 @@ export class CriarTabelaPagamento1734341780992 implements MigrationInterface {
         await queryRunner.createForeignKey(
             DBTable.PAGAMENTOS,
             new TableForeignKey({
-                columnNames: ["cpf_cliente"],
-                referencedColumnNames: ["cpf"],
+                columnNames: ["id_cliente"],
+                referencedColumnNames: ["id_usuario"],
                 referencedTableName: DBTable.CLIENTES,
                 onDelete: "CASCADE",
                 onUpdate: "CASCADE"

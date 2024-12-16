@@ -28,9 +28,8 @@ export class CriarTabelaNotificacao1734341472200 implements MigrationInterface {
                         isNullable: false
                     },
                     {
-                        name: "cpf_cliente",
-                        type: "varchar",
-                        length: "11",
+                        name: "id_cliente",
+                        type: "int",
                         isNullable: false
                     },
                     {
@@ -53,8 +52,8 @@ export class CriarTabelaNotificacao1734341472200 implements MigrationInterface {
         await queryRunner.createForeignKey(
             DBTable.NOTIFICACOES,
             new TableForeignKey({
-                columnNames: ["cpf_cliente"],
-                referencedColumnNames: ["cpf"],
+                columnNames: ["id_cliente"],
+                referencedColumnNames: ["id_usuario"],
                 referencedTableName: DBTable.CLIENTES,
                 onDelete: "CASCADE",
                 onUpdate: "CASCADE"

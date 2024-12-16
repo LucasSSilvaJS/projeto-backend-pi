@@ -27,15 +27,13 @@ export class CriarTabelaAgendamento1734341791228 implements MigrationInterface {
                         isNullable: false
                     },
                     {
-                        name: "cpf_cliente",
-                        type: "varchar",
-                        length: "11",
+                        name: "id_cliente",
+                        type: "int",
                         isNullable: false
                     },
                     {
-                        name: "matricula_func",
-                        type: "varchar",
-                        length: "255",
+                        name: "id_funcionario",
+                        type: "int",
                         isNullable: false
                     },
                     {
@@ -59,8 +57,8 @@ export class CriarTabelaAgendamento1734341791228 implements MigrationInterface {
             DBTable.AGENDAMENTOS,
             new TableForeignKey({
                 referencedTableName: DBTable.CLIENTES,
-                columnNames: ["cpf_cliente"],
-                referencedColumnNames: ["cpf"],
+                columnNames: ["id_cliente"],
+                referencedColumnNames: ["id_usuario"],
                 onDelete: "CASCADE",
                 onUpdate: "CASCADE",
             })
@@ -69,8 +67,8 @@ export class CriarTabelaAgendamento1734341791228 implements MigrationInterface {
         await queryRunner.createForeignKey(
             DBTable.AGENDAMENTOS,
             new TableForeignKey({
-                columnNames: ["matricula_func"],
-                referencedColumnNames: ["matricula"],
+                columnNames: ["id_funcionario"],
+                referencedColumnNames: ["id_usuario"],
                 referencedTableName: DBTable.FUNCIONARIOS,
                 onDelete: "CASCADE",
                 onUpdate: "CASCADE",

@@ -12,6 +12,6 @@ export class NotificacaoDTO{
     dataEnvio: Date;
 
     @IsNotEmpty()
-    @IsString()
-    cpf_cliente: string;
+    @IsNumber()
+    id_cliente: number;
 }
