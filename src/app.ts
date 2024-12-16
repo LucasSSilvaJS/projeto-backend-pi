@@ -4,6 +4,7 @@ import cors from 'cors';
 import { ErrorHandler } from './utils/ErrorHandler';
 import { ImagesController } from './http/controllers/ImagesController';
 
+import usuariosRoute from './routes/usuarios'
 import feedbacksRoute from './routes/feedbacks'
 import atendimentosRoute from './routes/atendimentos'
 import equipamentosRoute from './routes/equipamentos'
@@ -29,6 +30,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 const imagesController = new ImagesController();
 
+app.use("/usuarios", usuariosRoute);
 app.use("/feedbacks", feedbacksRoute);
 app.use("/atendimentos", atendimentosRoute);
 app.use("/equipamentos", equipamentosRoute);
@@ -46,7 +48,7 @@ app.use("/agendamentos", agendamentosRoute);
 //não deletar
 app.use("/authors", authorsRoute);
 app.use("/books", booksRoute);
-app.use("/auth", authRoute);
+// app.use("/auth", authRoute);
 app.get("/images/:type/:id", imagesController.get)
 
 app.use("*", (req: Request, res: Response) => {
