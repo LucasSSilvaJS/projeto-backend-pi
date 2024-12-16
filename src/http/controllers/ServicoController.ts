@@ -38,10 +38,10 @@ export class ServicoController {
 
     async update(req: Request, res: Response){
         const {id} = req.params;
-        const servicoDTO = req.body;
+        const servicoData = req.body;
 
         const dto = new ServicoDTO();
-        Object.assign(dto, servicoDTO);
+        Object.assign(dto, servicoData);
         dto.id_servico = parseInt(id);
 
         await validateOrReject(dto);
@@ -52,7 +52,7 @@ export class ServicoController {
             id_servico: Number(id),
         });
 
-        repo.merge(servico, servicoDTO);
+        repo.merge(servico, servicoData);
         await repo.save(servico);
 
         ResponseUtil.sendResponse(res, "Serviço atualizado com sucesso", servico);
