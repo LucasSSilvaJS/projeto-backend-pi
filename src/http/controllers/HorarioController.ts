@@ -3,8 +3,6 @@ import { AppDataSource } from "../../database/data-source";
 import { ResponseUtil } from "../../utils/Response";
 import { Paginator } from "../../database/Paginator";
 import { validateOrReject } from "class-validator";
-import { Agendamento } from "../../database/entities/Agendamento";
-import { AgendamentoDTO } from "../dtos/AgendamentoDTO";
 import { Horario } from "../../database/entities/Horario";
 import { HorarioDTO } from "../dtos/HorarioDTO";
 

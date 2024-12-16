@@ -3,8 +3,6 @@ import { AppDataSource } from "../../database/data-source";
 import { ResponseUtil } from "../../utils/Response";
 import { Paginator } from "../../database/Paginator";
 import { validateOrReject } from "class-validator";
-import { Atendimento } from "../../database/entities/Atendimento";
-import { AtendimentoDTO } from "../dtos/AtendimentoDTO";
 import { Feedback } from "../../database/entities/Feedback";
 import { FeedbackDTO } from "../dtos/FeedbackDTO";
 

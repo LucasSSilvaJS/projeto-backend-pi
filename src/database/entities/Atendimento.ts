@@ -3,6 +3,7 @@ import { DBTable } from "../../constants/DBTable";
 import { Feedback } from "./Feedback";
 import { Agendamento } from "./Agendamento";
 import { Servico } from "./Servico";
+import { ProdutoAtendimento } from "./ProdutoAtendimento";
 
 @Entity(DBTable.ATENDIMENTOS)
 export class Atendimento{
@@ -31,4 +32,7 @@ export class Atendimento{
     @ManyToOne(() => Servico, (servico) => servico.atendimentos)
     @JoinColumn({name: "id_servico"})
     servico: Servico;
+
+    @OneToMany(() => ProdutoAtendimento, (produtoAtendimento) => produtoAtendimento.atendimento)
+    produtoAtendimentos: ProdutoAtendimento[];
 }

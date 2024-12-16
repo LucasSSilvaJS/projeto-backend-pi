@@ -18,9 +18,6 @@ import horariosRoute from './routes/horarios'
 import agendamentosRoute from './routes/agendamentos'
 import clientesRoute from './routes/clientes'
 import funcionariosRoute from './routes/funcionarios'
-import authorsRoute from './routes/authors'
-import booksRoute from './routes/books'
-import authRoute from './routes/auth'
 
 const app: Express = express();
 
@@ -44,12 +41,7 @@ app.use("/horarios", horariosRoute);
 app.use("/clientes", clientesRoute);
 app.use("/funcionarios", funcionariosRoute);
 app.use("/agendamentos", agendamentosRoute);
-//livraria esqueleto
-//não deletar
-app.use("/authors", authorsRoute);
-app.use("/books", booksRoute);
-// app.use("/auth", authRoute);
-app.get("/images/:type/:id", imagesController.get)
+// app.get("/images/:type/:id", imagesController.get)
 
 app.use("*", (req: Request, res: Response) => {
     res.status(404).json({

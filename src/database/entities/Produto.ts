@@ -2,6 +2,7 @@ import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, Pri
 import { DBTable } from "../../constants/DBTable";
 import { Fornecedor } from "./Fornecedor";
 import { ServicoProduto } from "./ServicoProduto";
+import { ProdutoAtendimento } from "./ProdutoAtendimento";
 
 @Entity(DBTable.PRODUTOS)
 export class Produto{
@@ -32,4 +33,7 @@ export class Produto{
 
     @OneToMany(() => ServicoProduto, (servicoProduto) => servicoProduto.produto)
     servicoProdutos: ServicoProduto[];
+
+    @OneToMany(() => ProdutoAtendimento, (produtoAtendimento) => produtoAtendimento.produto)
+    produtoAtendimentos: ProdutoAtendimento[];
 }
