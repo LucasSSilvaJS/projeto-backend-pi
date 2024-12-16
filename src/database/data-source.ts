@@ -15,6 +15,7 @@ import { Categoria } from "./entities/Categoria";
 import { Fornecedor } from "./entities/Fornecedor";
 import { Equipamento } from "./entities/Equipamento";
 import { Atendimento } from "./entities/Atendimento";
+import { Feedback } from "./entities/Feedback";
 
 dotenv.config();
 
@@ -27,7 +28,7 @@ export const AppDataSource = new DataSource({
     database: "salaosenac",
     logging: ["query"],
     synchronize: false,
-    entities: [Author, Book, User, Cliente, Funcionario, Agendamento, Horario, Notificacao, Pagamento, Servico, Categoria, Produto, Fornecedor, Equipamento, Atendimento],
+    entities: [Author, Book, User, Cliente, Funcionario, Agendamento, Horario, Notificacao, Pagamento, Servico, Categoria, Produto, Fornecedor, Equipamento, Atendimento, Feedback],
     subscribers: [],
     migrations: ["src/database/migrations/*.ts"]
 });
