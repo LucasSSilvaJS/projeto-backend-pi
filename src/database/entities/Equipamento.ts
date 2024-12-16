@@ -1,6 +1,7 @@
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { DBTable } from "../../constants/DBTable";
 import { Fornecedor } from "./Fornecedor";
+import { ServicoEquipamento } from "./ServicoEquipamento";
 
 @Entity(DBTable.EQUIPAMENTOS)
 export class Equipamento{
@@ -16,4 +17,7 @@ export class Equipamento{
     @ManyToOne(() => Fornecedor, (fornecedor) => fornecedor.equipamentos)
     @JoinColumn({name: "id_fornecedor"})
     fornecedor: Fornecedor;
+
+    @OneToMany(() => ServicoEquipamento, (servicoEquipamento) => servicoEquipamento.equipamento)
+    servicoEquipamentos: ServicoEquipamento[];
 }

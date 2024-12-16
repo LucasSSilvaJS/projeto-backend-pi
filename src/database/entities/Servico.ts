@@ -3,6 +3,7 @@ import { DBTable } from "../../constants/DBTable";
 import { Categoria } from "./Categoria";
 import { Atendimento } from "./Atendimento";
 import { FuncionarioServico } from "./FuncionarioServico";
+import { ServicoEquipamento } from "./ServicoEquipamento";
 
 @Entity(DBTable.SERVICOS)
 export class Servico{
@@ -45,4 +46,7 @@ export class Servico{
 
     @OneToMany(() => FuncionarioServico, (funcionarioServico) => funcionarioServico.servico)
     funcionarioServicos: FuncionarioServico[];
+
+    @OneToMany(() => ServicoEquipamento, (servicoEquipamento) => servicoEquipamento.servico)
+    servicoEquipamentos: ServicoEquipamento[];
 }
