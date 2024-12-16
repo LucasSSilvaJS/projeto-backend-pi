@@ -1,5 +1,7 @@
 import { Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { DBTable } from "../../constants/DBTable";
+import { Cliente } from "./Cliente";
+import { Funcionario } from "./Funcionario";
 
 @Entity(DBTable.AGENDAMENTOS)
 export class Agendamento{
@@ -18,11 +20,11 @@ export class Agendamento{
     @Column({nullable: false})
     matricula_func: string;
 
-    // @ManyToOne((type) => Cliente, (cliente) => cliente.agendamentos)
-    // cliente: Cliente;
+    @ManyToOne((type) => Cliente, (cliente) => cliente.agendamentos)
+    cliente: Cliente;
 
-    // @ManyToOne((type) => Funcionario, (funcionario) => funcionario.agendamentos)
-    // funcionario: Funcionario;
+    @ManyToOne((type) => Funcionario, (funcionario) => funcionario.agendamentos)
+    funcionario: Funcionario;
 
     @CreateDateColumn()
     createdAt: Date;

@@ -20,8 +20,8 @@ export class Funcionario{
     @Column({nullable: false})
     disponibilidade: string;
 
-    // @OneToMany((type) => Agendamento, (agendamento) => agendamento.funcionario)
-    // agendamentos: Agendamento[];
+    @OneToMany((type) => Agendamento, (agendamento) => agendamento.funcionario)
+    agendamentos: Agendamento[];
 
     @OneToOne(() => Usuario, (usuario) => usuario.funcionario)
     @JoinColumn()

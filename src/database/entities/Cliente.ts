@@ -19,8 +19,8 @@ export class Cliente{
     @Column({nullable: false})
     telefone: string;
 
-    // @OneToMany((type) => Agendamento, (agendamento) => agendamento.cliente)
-    // agendamentos: Agendamento[];
+    @OneToMany((type) => Agendamento, (agendamento) => agendamento.cliente)
+    agendamentos: Agendamento[];
 
     @CreateDateColumn()
     createdAt: Date;
