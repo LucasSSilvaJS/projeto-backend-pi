@@ -9,7 +9,7 @@ export class CriarTabelaFuncionarioServico1734344144161 implements MigrationInte
                 name: DBTable.FUNCIONARIO_SERVICO,
                 columns: [
                     {
-                        name: "id_usuario",
+                        name: "id_funcionario",
                         type: "int",
                         isPrimary: true,
                         isNullable: false
@@ -28,7 +28,7 @@ export class CriarTabelaFuncionarioServico1734344144161 implements MigrationInte
         await queryRunner.createForeignKey(
             DBTable.FUNCIONARIO_SERVICO,
             new TableForeignKey({
-                columnNames: ["id_usuario"],
+                columnNames: ["id_funcionario"],
                 referencedColumnNames: ["id_usuario"],
                 referencedTableName: DBTable.FUNCIONARIOS,
                 onDelete: "CASCADE",

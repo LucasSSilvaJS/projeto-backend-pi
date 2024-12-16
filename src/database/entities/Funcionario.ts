@@ -2,6 +2,7 @@ import { Column, CreateDateColumn, Entity, JoinColumn, OneToMany, OneToOne, Prim
 import { DBTable } from "../../constants/DBTable";
 import { Agendamento } from "./Agendamento";
 import { Usuario } from "./Usuario";
+import { FuncionarioServico } from "./FuncionarioServico";
 
 @Entity(DBTable.FUNCIONARIOS)
 export class Funcionario{
@@ -26,6 +27,9 @@ export class Funcionario{
     @OneToOne(() => Usuario, (usuario) => usuario.funcionario)
     @JoinColumn()
     usuario: Usuario;
+
+    @OneToMany(() => FuncionarioServico, (funcionarioServico) => funcionarioServico.funcionario)
+    funcionarioServicos: FuncionarioServico[];
 
     @CreateDateColumn()
     createdAt: Date;

@@ -1,6 +1,7 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { DBTable } from "../../constants/DBTable";
 import { Equipamento } from "./Equipamento";
+import { Produto } from "./Produto";
 
 @Entity(DBTable.FORNECEDORES)
 export class Fornecedor{
@@ -18,4 +19,7 @@ export class Fornecedor{
 
     @OneToMany(() => Equipamento, (equipamento) => equipamento.fornecedor)
     equipamentos: Equipamento[];
+
+    @OneToMany(() => Produto, (produto) => produto.fornecedor)
+    produtos: Produto[];
 }

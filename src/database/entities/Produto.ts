@@ -1,5 +1,6 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { DBTable } from "../../constants/DBTable";
+import { Fornecedor } from "./Fornecedor";
 
 @Entity(DBTable.PRODUTOS)
 export class Produto{
@@ -23,4 +24,8 @@ export class Produto{
 
     @UpdateDateColumn()
     updatedAt: Date;
+
+    @ManyToOne(() => Fornecedor, (fornecedor) => fornecedor.produtos)
+    @JoinColumn({name: "id_fornecedor"})
+    fornecedor: Fornecedor;
 }
